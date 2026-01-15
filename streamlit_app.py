@@ -18,10 +18,11 @@ else:
 
     # Create an OpenAI client.
     client = OpenAI(api_key=openai_api_key)
+    client.models.list() # Validates the key by asking for the models that the key is compatible with
 
     # Let the user upload a file via `st.file_uploader`.
     uploaded_file = st.file_uploader(
-        "Upload a document (.txt or .md)", type=("txt", "md")
+        "Upload a document (.txt or .md or .pdf)", type=("txt", "md", "pdf")
     )
 
     # Ask the user for a question via `st.text_area`.
@@ -44,7 +45,7 @@ else:
 
         # Generate an answer using the OpenAI API.
         stream = client.chat.completions.create(
-            model="gpt-3.5-turbo",
+            model="gpt-5-nano",
             messages=messages,
             stream=True,
         )
